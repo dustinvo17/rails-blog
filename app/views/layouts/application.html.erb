@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BlogRor</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="container">
+  <nav class="navbar navbar-dark bg-dark navbar-expand-lg ">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/posts/new">Create</a>
+      </li>
+      <% if logged_in? %>
+        <li class="nav-item">
+        <%= link_to 'Your Posts','/users/posts' %>
+        </li>
+        <li class="nav-item">
+           <p class="btn btn-danger">
+           <%= current_user.username  %>
+           </p>
+           <li class="nav-item">
+        <%= link_to "Log out", logout_path, method: :delete , class:"nav-link btn-danger mx-5 btn"%>
+      </li>
+
+      </li>
+       
+      <% else %>
+         <li class="nav-item">
+        <a class="nav-link" href="/users/new">Sign up</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login in</a>
+      </li>
+      <% end %>
+      
+    </ul>
+     
+  </nav>
+  <div class="jumbotron">
+  <h1 class="display-4"> <%= yield :section %></h1>
+  </div>
+    <%= yield %>
+  </body>
+</html>

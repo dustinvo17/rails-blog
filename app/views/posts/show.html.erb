@@ -1,0 +1,46 @@
+<script>
+  let replyBtns;
+  let formReplies;
+</script>
+<% content_for :section  do %>
+    <% @post.title %>
+<% end %>
+
+ <div class="card w-100 mt-2" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= @post.title %></h5>
+    <p class="card-text"><%= @post.body %></p>
+    <% if logged_in?   && @post.user_id == current_user.id %>
+         <%= link_to 'Edit' , edit_post_path(@post) , class:"btn btn-primary" %>
+       <%= link_to 'Delete' , @post  , method: :delete, data: { confirm: 'Are you sure?' }  , class:"btn btn-danger" %>
+  </div>
+    <% end %>
+   
+
+  <%= render 'comments/comment' , comments:@originalList, sublist:@subList , users: @users %>
+  <hr>
+   <% if logged_in? %>
+       <%= render 'comments/form' %>
+    <% end %>
+  </div>
+ 
+  
+</div>
+<script>
+  
+    replyBtns = document.querySelectorAll('.reply')
+     formReplies = document.querySelectorAll('.form-reply')
+    replyBtns.forEach((btn,i) => {
+      btn.addEventListener('click',function() {
+        
+      if(formReplies[i].style.display == 'none'){
+        formReplies[i].style.display = 'block'
+      }
+      else {
+          formReplies[i].style.display = 'none'
+      }
+        
+    })
+    })
+    
+</script>

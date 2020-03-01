@@ -1,0 +1,16 @@
+<div class='container pb-3'>
+ 
+    <%= form_for [@post, @post.comments.build] , html:{class:"mt-1"} do |f| %>
+ <p>Leave A comments</p>
+   <%= f.hidden_field :parent_id, :value => -1 %>
+    <div class="form-group"> 
+        <%= f.label :author , 'author'  %>
+        <%= f.text_field :author , class:"form-control" %>
+    </div>
+    <div class="form-group">
+            <%= f.label :body , 'Body' %>
+        <%= f.text_field :body, class:"form-control" %>
+    </div>
+            <%= f.submit  class:"btn btn-primary" %>
+    <% end %>
+</div>
